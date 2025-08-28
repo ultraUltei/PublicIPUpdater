@@ -1,5 +1,4 @@
 #!/bin/sh
-
 echo "From: host@mail.com" > msg.txt
 echo "Subject: Public IP Update" >> msg.txt
 echo "" >> msg.txt
