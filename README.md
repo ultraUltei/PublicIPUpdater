@@ -42,6 +42,5 @@ You can modify these values to adjust how frequently the daemon checks for IP ch
 ## Usage
 
 Once installed and the system is rebooted, the daemon will run in the background automaticly
+
 ---
-
-
