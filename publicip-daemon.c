@@ -24,14 +24,14 @@ int main(int argc, char* argv[]){
     if(!file) return 0;
 
     char * state = (char *) malloc(sizeof(char)*SIZE);
-    while(sleep(1), 1){ // wating for the 'up' interface state
+    while(sleep(1), 1){ // waiting for the 'up' interface state
         if(!fgets(state, SIZE, file)) return 0;
 		rewind(file);
         if(!strcmp(state, "up")){ // state is 'up'
         	free(state);
         	fclose(file);   
-            while (!internet_access()) sleep(5); // this while waits for internet access
-			// the second while checks for the public IP and waits if there's no internet access
+            while (!internet_access()) sleep(5); // wait until internet access is available
+			// repeatedly checks public IP, waits if there's no internet access
             while(ip_checker(), sleep(ONLINE_CYCLE), 1) if(!internet_access()) while(sleep(OFFLINE_CYCLE), 1) if(internet_access()) break; 
         }
     }
@@ -49,20 +49,20 @@ void ip_checker(){
 	}
     
     char oldip[IP_SIZE];
-    fgets(oldip, IP_SIZE, fileIP); // this line reads the ip.txt file
+    fgets(oldip, IP_SIZE, fileIP); // read the old IP from ip.txt
     fclose(fileIP);
 
     ip[strcspn(ip, "\n")] = '\0';
     oldip[strcspn(oldip, "\n")] = '\0';
 
-    if(strcmp(ip, oldip)) mail_sender(ip); // if the IPs are different, call the mail_sender() function
+    if(strcmp(ip, oldip)) mail_sender(ip); // send email if IP has changed
 }
 void mail_sender(char* ip){
     char command[64];
     snprintf(command, sizeof(command), "sh ./sendmail.sh %s", ip);
-    if(system(command)) return; // this line runs the script
+    if(system(command)) return; // execute sendmail.sh script
 
-    // ip.txt update
+    // update ip.txt with the new IP
     FILE *fileIP = fopen("ip.txt", "w");
     if (!fileIP) return;
     fprintf(fileIP, "%s", ip);
