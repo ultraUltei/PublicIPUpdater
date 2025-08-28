@@ -27,19 +27,21 @@ This small C program monitors the public IP of your system and automatically sen
    ```bash
    chmod +x sendmail.sh publicip-daemon /etc/local.d/publicip.start
 
+## Tips
+
+In publicip-daemon.c there are two #define values that control the monitoring intervals:
+
+ONLINE_CYCLE: Time in seconds between checks when internet is available (default 10 minutes).
+
+OFFLINE_CYCLE: Time in seconds between checks when no internet access is detected (default 5 minutes).
+
+You can modify these values to adjust how frequently the daemon checks for IP changes or connectivity issues.
+
 ---
 
 ## Usage
 
-Once installed and the system is rebooted, the daemon will run in the background. It will:
+Once installed and the system is rebooted, the daemon will run in the background automaticly
+---
 
-- Monitor the specified network interface state (up or down).
-
-- Check for internet connectivity.
-
-- Detect changes in the public IP using curl.
-
-- Send an email notification if the public IP changes.
-
-- Update the ip.txt file with the new IP.
 
