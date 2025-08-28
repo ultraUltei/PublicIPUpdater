@@ -4,8 +4,8 @@
 #include <unistd.h>
 
 // defines
-#define OFFLINE_CYCLE 60*5 // offline cycle time
-#define ONLINE_CYCLE 60*10 // online cycle time
+#define OFFLINE_CYCLE 60*5
+#define ONLINE_CYCLE 60*10
 
 #define SIZE 3
 #define IP_SIZE 16
