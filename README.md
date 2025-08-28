@@ -30,8 +30,10 @@ This small C program monitors the public IP of your system and automatically sen
 ## Tips
 
 In publicip-daemon.c there are two #define values that control the monitoring intervals:
-`ONLINE_CYCLE`: Time in seconds between checks when internet is available (default 10 minutes).
-`OFFLINE_CYCLE`: Time in seconds between checks when no internet access is detected (default 5 minutes).
+
+`ONLINE_CYCLE` Time in seconds between checks when internet is available (default 10 minutes).
+
+`OFFLINE_CYCLE` Time in seconds between checks when no internet access is detected (default 5 minutes).
 
 You can modify these values to adjust how frequently the daemon checks for IP changes or connectivity issues.
 
