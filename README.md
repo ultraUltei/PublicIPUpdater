@@ -18,14 +18,14 @@ This small C program monitors the public IP of your system and automatically sen
    ```bash
    gcc -o publicip-daemon publicip-daemon.c
    
-3. Place publicip.start in /etc/local.d/ so that it runs at system startup. Make sure to modify it with your network interface and correct path to the daemon:
+3. Place `publicip.start` in `/etc/local.d/` so that it runs at system startup. Make sure to modify it with your network interface and correct path to the daemon:
    ```bash
    #!/bin/bash
    cd /path/to/your/directory && ./publicip-daemon /sys/class/net/<your network interface>/operstate &
 
 4. Ensure both scripts are executable:
    ```bash
-   chmod +x sendmail.sh publicip-daemon /etc/local.d/publicip.start
+   chmod +x sendmail.sh /etc/local.d/publicip.start
 
 ## Tips
 
