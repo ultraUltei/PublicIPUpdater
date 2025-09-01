@@ -23,12 +23,11 @@ int main(int argc, char* argv[]){
     FILE *file = fopen(argv[1], "r");
     if(!file) return 0;
 
-    char * state = (char *) malloc(sizeof(char)*SIZE);
+    char state[SIZE];
     while(sleep(1), 1){ // waiting for the 'up' interface state
         if(!fgets(state, SIZE, file)) return 0;
 		rewind(file);
         if(!strcmp(state, "up")){ // state is 'up'
-        	free(state);
         	fclose(file);   
             while (!internet_access()) sleep(5); // wait until internet access is available
 			// repeatedly checks public IP, waits if there's no internet access
