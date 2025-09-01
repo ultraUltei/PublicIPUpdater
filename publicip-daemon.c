@@ -42,11 +42,8 @@ void ip_checker(){
     if(!curl_ip(ip)) return; // gets the current IP
 
 	// old IP from the ip.txt file
-	FILE* fileIP = fopen("ip.txt", "r");
-	if(!fileIP) {
-		ip_file_creator();
-		fileIP = fopen("ip.txt", "r");
-	}
+	FILE* fileIP; 
+	while(sleep(1), !(fileIP = fopen("ip.txt", "r"))) ip_file_creator();
     
     char oldip[IP_SIZE];
     fgets(oldip, IP_SIZE, fileIP); // read the old IP from ip.txt
@@ -77,12 +74,9 @@ int internet_access(){
 int curl_ip(char* ip){
 	FILE* curl = popen("curl -s ident.me", "r");
 	if(!curl) return 0;
-	if(fgets(ip, IP_SIZE, curl)) {
-		pclose(curl);
-		return 1;
-	}
+	int state = fgets(ip, IP_SIZE, curl) != NULL;
 	pclose(curl);
-	return 0;
+	return state;
 }
 void ip_file_creator(){
 	FILE* file = fopen("ip.txt", "w");
