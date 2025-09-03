@@ -23,14 +23,15 @@ This small C program monitors the public IP of your system and automatically sen
    #!/bin/bash
    cd /path/to/your/daemon/directory && ./publicip-daemon /sys/class/net/<your network interface>/operstate &
 
-4. Ensure both scripts are executable:
+4. If you already have the `msmtp` client configured, skip to step 5. If you use a different mail client rather than `msmtp`, change the last line of code in `sendmail.sh`.
+
+5. Ensure both scripts are executable:
    ```bash
    chmod +x sendmail.sh publicip.start
 
-5. Place `publicip.start` in `/etc/local.d/` so that it runs at system startup.
+6. Place `publicip.start` in `/etc/local.d/` so that it runs at system startup:
    ```bash
    mv publicip.start /etc/local.d/
-
 
 ## Tips
 
